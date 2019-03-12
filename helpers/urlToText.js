@@ -28,6 +28,7 @@ if (cluster.isMaster) {
 // Called only from the master
 const recognitionPromises = {}
 let clusterNumber = 0
+
 async function urlToText(url, chat) {
   // Obtain worker syncronously
   const lock = new Lock(1)
