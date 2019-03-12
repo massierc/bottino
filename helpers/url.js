@@ -7,7 +7,7 @@ const qs = require('querystring')
  * @returns {URL} Url to download file
  */
 function fileUrl(filePath) {
-  return `https://api.telegram.org/file/bot${process.env.TOKEN}/${qs.escape(filePath)}`
+  return `https://api.telegram.org/file/bot${process.env.BOT_TOKEN}/${qs.escape(filePath)}`
 }
 
 // Exports

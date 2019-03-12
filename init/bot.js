@@ -4,7 +4,7 @@ const { report } = require('../helpers/report')
 const cluster = require('cluster')
 const uuid = require('uuid/v4')
 // Create bot
-const bot = new Telegraf(process.env.TOKEN, {
+const bot = new Telegraf(process.env.BOT_TOKEN, {
   channelMode: true,
 })
 bot.webhookReply = false

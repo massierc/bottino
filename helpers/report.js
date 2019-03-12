@@ -36,13 +36,13 @@ async function report(bot, err, prefix) {
     }
     const telegram = bot
       ? bot.telegram || bot
-      : new Telegraf(process.env.TOKEN, {
+      : new Telegraf(process.env.BOT_TOKEN, {
           username: process.env.USERNAME,
           channelMode: true,
         }).telegram
     await telegram.sendMessage(
       process.env.ADMIN_ID,
-      `*Voicy*${prefix ? ` (${prefix})` : ''}:\nMessage: ${
+      `*Trellobello*${prefix ? ` (${prefix})` : ''}:\nMessage: ${
         err.message
       }\n\`\`\`${JSON.stringify(err, undefined, 2)}\`\`\``,
       {
@@ -58,7 +58,7 @@ async function reportUsage(ctx, usage) {
   try {
     await ctx.telegram.sendMessage(
       process.env.ADMIN_ID,
-      `*Voicy*:\n${ctx.from.id} used ${usage}`,
+      `*Trellobello*:\n${ctx.from.id} used ${usage}`,
       {
         parse_mode: 'Markdown',
       }
