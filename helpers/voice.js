@@ -3,6 +3,7 @@ const urlFinder = require('./url')
 const createCard = require('./trello')
 const { findChat, findVoice, addVoice } = require('./db')
 const { report } = require('./report')
+const { timestampAndUser } = require('./logAnswerTime')
 const urlToText = require('./urlToText')
 const _ = require('lodash')
 
@@ -103,9 +104,8 @@ async function sendTranscription(ctx, url, chat) {
   } finally {
     // Log time
     console.info(
-      `audio message processed in ${(new Date().getTime() -
-        ctx.timeReceived.getTime()) /
-        1000}s`
+      timestampAndUser(ctx.message.from),
+      `audio message processed in ${(new Date().getTime() - ctx.timeReceived.getTime()) / 1000}s`
     )
   }
 }
@@ -161,9 +161,8 @@ async function sendAction(ctx, url, chat) {
   } finally {
     // Log time
     console.info(
-      `audio message processed in ${(new Date().getTime() -
-        ctx.timeReceived.getTime()) /
-        1000}s`
+      timestampAndUser(ctx.message.from),
+      `audio message processed in ${(new Date().getTime() - ctx.timeReceived.getTime()) / 1000}s`
     )
   }
 }

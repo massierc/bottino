@@ -1,5 +1,5 @@
 // Dependencies
-const logAnswerTime = require('../helpers/logAnswerTime')
+const { logAnswerTime } = require('../helpers/logAnswerTime')
 const { languageMaps } = require('../helpers/language/languageConstants')
 const fs = require('fs')
 const yaml = require('js-yaml')

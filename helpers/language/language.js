@@ -7,7 +7,7 @@ const {
 } = require('./languageConstants')
 const engineString = require('../engine/engineString')
 const languageKeyboard = require('./languageKeyboard')
-const logAnswerTime = require('../logAnswerTime')
+const { logAnswerTime } = require('../logAnswerTime')
 
 async function setLanguageCode(ctx) {
   const code = ctx.from.language_code.split('-')[0]

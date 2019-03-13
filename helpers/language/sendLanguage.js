@@ -1,7 +1,7 @@
 // Dependencies
 const languageKeyboard = require('./languageKeyboard')
 const engineString = require('../engine/engineString')
-const logAnswerTime = require('../logAnswerTime')
+const { logAnswerTime } = require('../logAnswerTime')
 
 module.exports = async function sendLanguage(ctx, isCommand) {
   // Get chat

@@ -1,6 +1,6 @@
 // Dependencies
 const handleMessage = require('./voice')
-const logAnswerTime = require('../helpers/logAnswerTime')
+const { logAnswerTime } = require('../helpers/logAnswerTime')
 
 function setupAudioHandler(bot) {
   // Voice handler

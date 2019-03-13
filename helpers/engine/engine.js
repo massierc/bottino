@@ -1,6 +1,6 @@
 // Dependencies
 const engineString = require('./engineString')
-const logAnswerTime = require('../logAnswerTime')
+const { logAnswerTime } = require('../logAnswerTime')
 
 async function sendEngine(ctx) {
   // Construct options keyboard

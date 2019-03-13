@@ -1,5 +1,5 @@
 // Dependencies
-const logAnswerTime = require('../helpers/logAnswerTime')
+const { logAnswerTime } = require('../helpers/logAnswerTime')
 const checkAdminLock = require('../middlewares/adminLock')
 
 function setupTimecodes(bot) {
