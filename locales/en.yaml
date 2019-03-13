@@ -22,7 +22,7 @@ lock_false: '🔑 Great! *Bottino* will now respond only to command calls from *
 silent_true: '😶 Magnificent! *Bottino* will now work in *silent mode*: it will not send any messages to the chat except for the actual voice transcriptions.'
 silent_false: '😏 Magnificent! *Bottino* will now work in *usual mode*: it will send `Voice recognition is initiated` messages right after it receives voice messages.'
 start: |
-  👋 Hello there! *Bottino* converts speech to text from any voice message and audio file (.ogg, .flac, .wav, .mp3) and posts it to a Trello board as a card.
+  👋 Hello there! *Bottino* converts speech to text from any voice message and audio file (.ogg, .flac, .wav, .mp3) and posts it to a Trello board as a card. It is built on top of Voicy (@voicybot).
 
   More information in /help.
 engine: '👋 Please, select the engine of speech recognition. Google Speech is more accurate, but has to be set up with your Google Cloud credentials (a bit tedious). Wit.ai is less accurate, but free. Please, note that both of them support different languages, so pick the one that suits you the best.'

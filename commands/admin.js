@@ -51,7 +51,7 @@ async function handleCheckTranslation(ctx, locale) {
     locale = ctx.message.text.substring(18).trim()
   }
   // set locale
-  ctx.i18n.locale(locale || 'en')
+  ctx.i18n.locale(locale || 'it')
   // Check all the strings
   const doc = yaml.safeLoad(
     fs.readFileSync(`${__dirname}/../locales/en.yaml`, 'utf8')

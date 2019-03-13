@@ -22,7 +22,7 @@ lock_false: '🔑 Ottimo! *Bottino* risponderà ora solo ai comandi inviati da *
 silent_true: '😶 Magnifico! *Bottino* funzionerà ora in *modalità silenziosa*: non invierà alcun messaggio eccetto le effettive trascrizioni vocali.'
 silent_false: '😏 Magnifico! *Bottino* funzionerà ora in *modalità normale*: invierà i messaggi ‘Il riconoscimento vocale è iniziato’ subito dopo aver ricevuto i messaggi vocali. '
 start: |
-  👋 Ciao! *Bottino* converte messaggi vocali e file audio (.ogg, .flac, .wav, .mp3) che riceve in testo, con il quale crea una card su una board di Trello.
+  👋 Ciao! *Bottino* converte messaggi vocali e file audio (.ogg, .flac, .wav, .mp3) che riceve in testo, con il quale crea una card su una board di Trello. È costruito a partire da Voicy (@voicybot).
 
   Maggiori informazioni su /help
 engine: '👋 Per favore, seleziona il motore di riconoscimento vocale. Google Speech è maggiormente accurato e supporta audio più lunghi di 50 secondi, ma deve essere impostato con le tue credenziali di Google Cloud (un po’ noioso). Yandex Speechkit è piuttosto accurato, gratuito, privato e la maggior parte delle volte supporta audio più lunghi di 50 secondi, ma ha una lista limitata di linguaggi. Wit.ai è meno accurato, gratuito, e non supporta audio più lunghi di 50 secondi, ma ha abbondanza di linguaggi. Per favore, notare che tutti e tre i motori supportano differenti linguaggi, quindi scegli quello che si adatta meglio.'
