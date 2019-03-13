@@ -8,7 +8,7 @@ function timestampAndUser(user) {
 
 function logAnswerTime(ctx, name) {
   console.info(
-    timestampAndUser(ctx.message.from),
+    timestampAndUser(ctx.message ? ctx.message.from : ctx.update.message.from),
     `${name} answered in ${(new Date().getTime() - ctx.timeReceived.getTime()) / 1000}s`
   )
 }

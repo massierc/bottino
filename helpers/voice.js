@@ -104,7 +104,7 @@ async function sendTranscription(ctx, url, chat) {
   } finally {
     // Log time
     console.info(
-      timestampAndUser(ctx.message.from),
+      timestampAndUser(ctx.message ? ctx.message.from : ctx.update.message.from),
       `audio message processed in ${(new Date().getTime() - ctx.timeReceived.getTime()) / 1000}s`
     )
   }
@@ -161,7 +161,7 @@ async function sendAction(ctx, url, chat) {
   } finally {
     // Log time
     console.info(
-      timestampAndUser(ctx.message.from),
+      timestampAndUser(ctx.message ? ctx.message.from : ctx.update.message.from),
       `audio message processed in ${(new Date().getTime() - ctx.timeReceived.getTime()) / 1000}s`
     )
   }
