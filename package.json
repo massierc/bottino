@@ -24,6 +24,7 @@
     "js-yaml": "^3.12.1",
     "lodash": "^4.17.2",
     "mongoose": "^4.9.4",
+    "node-fetch": "^2.3.0",
     "semaphore-async-await": "^1.5.1",
     "telegraf": "^3.27.1",
     "telegraf-i18n": "backmeupplz/telegraf-i18n#78ee719cb8be9413d64a3a14325209f3a793a541",
