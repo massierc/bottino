@@ -1,5 +1,6 @@
 // Dependencies
 const urlFinder = require('./url')
+const createCard = require('./trello')
 const { findChat, findVoice, addVoice } = require('./db')
 const { report } = require('./report')
 const urlToText = require('./urlToText')
@@ -178,16 +179,32 @@ async function sendAction(ctx, url, chat) {
 async function updateMessagewithTranscription(ctx, msg, text, chat, markdown) {
   // Create options
   const options = {}
+  const message = {}
   if (!text || markdown) {
     options.parse_mode = 'Markdown'
   }
   if (!text || text.length <= 4000) {
+    try {
+      if (text) {
+        // POST card to Trello
+        const { shortUrl } = await createCard({
+          listId: '5c8798ee34ac6b81df7366dd',
+          payload: text,
+        })
+        message.text = ctx.i18n.t('card_creation_confirmation', { url: shortUrl, text })
+      } else {
+        message.text = ctx.i18n.t('speak_clearly')
+      }
+    } catch (err) {
+      message.text = ctx.i18n.t('trello_failed', { text })
+      report(ctx, err, 'createCard')
+    }
     // Edit message
     await ctx.telegram.editMessageText(
       msg.chat.id,
       msg.message_id,
       null,
-      text || ctx.i18n.t('speak_clearly'),
+      message.text,
       options
     )
   } else {
