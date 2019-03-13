@@ -63,7 +63,6 @@ async function setLanguage(data, ctx) {
   ctx.editMessageText(
     ctx.i18n.t('language_success', {
       language: languageString(language, engine),
-      engine: engineString(engine),
     }),
     {
       parse_mode: 'Markdown',

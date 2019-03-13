@@ -10,31 +10,25 @@ help: |
   Se vuoi usare questo programma nei messaggi privati, per cortesia, crea un gruppo privato con chiunque e aggiungi *Trellobello*. Se desideri aggiungere *Trellobello* in una chat di gruppo, per cortesia, aggiungilo come partecipante sul profilo del gruppo oppure al gruppo nel profilo del programma *Trellobello*. 
 
   /help – Mostra questo messaggio 😱
-  /engine – Ti consente di selezionare un motore di riconoscimento vocale: wit.ai, Yandex SpeechKit o Google Speech ⚙
   /language – Ti consente di selezionare un linguaggio di riconoscimento vocale 📣
   /lock – Attiva lo sblocco o il blocco dell’uso di comandi nelle chat di gruppo da parte di utenti non amministratori 🔑
   /files – Attiva se il programma debba tentare di convertire file audio o semplicemente ignorarli 📁
   /silent – Attiva la modalità silenziosa quando non vengono inviati messaggi extra come “Il riconoscimento vocale è iniziato” 😶
-  /google - Configurazione delle credenziali Google per Google Speech 🦆
 
-  Ti piace questo programma? Lascia una recensione [qui](https://telegram.me/storebot?start=Trellobellobot) 👍
-
-  Invia qualsiasi dubbio o domanda al mio creatore - @borodutch\\_support 🦄
+  Invia qualsiasi dubbio o domanda al mio creatore - @massierc 🦄
 error_group: '😅 Spiacente ma questo comando funziona solamente nelle chat di gruppo.'
 lock_true: '🔑 Ottimo! *Trellobello* risponderà ora solo ai comandi inviati dagli *amministratori* in questa chat.'
 lock_false: '🔑 Ottimo! *Trellobello* risponderà ora solo ai comandi inviati da *chiunque* in questa chat.'
 silent_true: '😶 Magnifico! *Trellobello* funzionerà ora in *modalità silenziosa*: non invierà alcun messaggio eccetto le effettive trascrizioni vocali.'
 silent_false: '😏 Magnifico! *Trellobello* funzionerà ora in *modalità normale*: invierà i messaggi ‘Il riconoscimento vocale è iniziato’ subito dopo aver ricevuto i messaggi vocali. '
-start: '|
-  👋 Ciao! *Trellobello* è un programma di riconoscimento vocale che converte tutti i messaggi vocali e i file audio (.ogg, .flac, .wav, .mp3) che riceve in testo.
-
-  *Trellobello* supporta tre motori di riconoscimento vocale: wit.ai, Yandex, SpeechKit e Google Speech. Inizialmente è impostato per utilizzare wit.ai ma puoi passare a Google Speech o Yandex SpeechKit in qualsiasi momento in /engine. Maggiori informazioni in /help.'
+start: |
+  👋 Ciao! *Trellobello* è un programma di riconoscimento vocale che converte tutti i messaggi vocali e i file audio (.ogg, .flac, .wav, .mp3) che riceve in testo, con il quale crea una card su una board di Trello.
 engine: '👋 Per favore, seleziona il motore di riconoscimento vocale. Google Speech è maggiormente accurato e supporta audio più lunghi di 50 secondi, ma deve essere impostato con le tue credenziali di Google Cloud (un po’ noioso). Yandex Speechkit è piuttosto accurato, gratuito, privato e la maggior parte delle volte supporta audio più lunghi di 50 secondi, ma ha una lista limitata di linguaggi. Wit.ai è meno accurato, gratuito, e non supporta audio più lunghi di 50 secondi, ma ha abbondanza di linguaggi. Per favore, notare che tutti e tre i motori supportano differenti linguaggi, quindi scegli quello che si adatta meglio.'
 callback_error: 'Solo la persona che ha lanciato il comando può selezionare le opzioni'
 engine_success: '👍 Ora *Trellobello* usa *${engine}* in questa chat. Grazie! Non dimenticare di impostare /language.'
 language: '👋 Per favore scegli il linguaggio di riconoscimento vocale per ${engine}'
 language_without_engine: '👋 Per favore scegli il linguaggio di riconoscimento vocale'
-language_success: '👍 Adesso Trellobello parla *${language}* (${engine}) in questa chat. Grazie!'
+language_success: '👍 Adesso Trellobello parla *${language}* in questa chat. Grazie!'
 error_twenty: '_👮 Non posso riconoscere messaggi vocali più grandi di 20 megabytes_'
 initiated: '_🦄 Il riconoscimento vocale è iniziato..._'
 speak_clearly: '_👮 Per favore, parla chiaramente, non sono riuscito a riconoscerlo_'
