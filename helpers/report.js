@@ -42,7 +42,7 @@ async function report(bot, err, prefix) {
         }).telegram
     await telegram.sendMessage(
       process.env.ADMIN_ID,
-      `*Trellobello*${prefix ? ` (${prefix})` : ''}:\nMessage: ${
+      `*Bottino*${prefix ? ` (${prefix})` : ''}:\nMessage: ${
         err.message
       }\n\`\`\`${JSON.stringify(err, undefined, 2)}\`\`\``,
       {
@@ -58,7 +58,7 @@ async function reportUsage(ctx, usage) {
   try {
     await ctx.telegram.sendMessage(
       process.env.ADMIN_ID,
-      `*Trellobello*:\n${ctx.from.id} used ${usage}`,
+      `*Bottino*:\n${ctx.from.id} used ${usage}`,
       {
         parse_mode: 'Markdown',
       }

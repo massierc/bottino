@@ -1,13 +1,13 @@
-files_false: '📁 Wonderful! *Trellobello* will *ignore* all audio files in this chat since now.'
-files_true: '📁 Wonderful! *Trellobello* will *try to recognize* all audio files in this chat since now.'
-google: 'Reply to this message with the Google Cloud credentials file (.json) to set up Google Speech voice recognition. Not sure what is this and how to get it? Check out [our quick tutorial](https://medium.com/@nikitakolmogorov/setting-up-google-speech-for-Trellobellobot-b806545750f8).'
+files_false: '📁 Wonderful! *Bottino* will *ignore* all audio files in this chat since now.'
+files_true: '📁 Wonderful! *Bottino* will *try to recognize* all audio files in this chat since now.'
+google: 'Reply to this message with the Google Cloud credentials file (.json) to set up Google Speech voice recognition. Not sure what is this and how to get it? Check out [our quick tutorial](https://medium.com/@nikitakolmogorov/setting-up-google-speech-for-Bottinobot-b806545750f8).'
 google_error_doc: 'Sorry, you should reply with a credentials document.'
 google_error_mime: "Sorry, document's mime type should be 'text/plain'."
-google_success: 'Congratulations! *Trellobello* got the credentials file for the *${projectId}* Google Cloud Project. Now you are able to use Google Speech recognition.'
+google_success: 'Congratulations! *Bottino* got the credentials file for the *${projectId}* Google Cloud Project. Now you are able to use Google Speech recognition.'
 help: |
-  😎 *Trellobello* converts speech to text from any voice messages and audio files (.ogg, .flac, .wav, .mp3) it receives and posts it to a Trello board as a card. You can either talk to *Trellobello* in the private chat or add it to a group.
+  😎 *Bottino* converts speech to text from any voice messages and audio files (.ogg, .flac, .wav, .mp3) and posts it to a Trello board as a card. You can either talk to *Bottino* in the private chat or add it to a group.
 
-  If you want to use this bot in private messages, please, create a private group with anyone and add *Trellobello* there. If you want to add *Trellobello* to a group chat, please, add it as a participant on the group profile or to the group in the *Trellobello* bot profile.
+  If you want to use this bot in private messages, please, create a private group with anyone and add *Bottino* there. If you want to add *Bottino* to a group chat, please, add it as a participant on the group profile or to the group in the *Bottino* bot profile.
 
   /help — Shows this message 😱
   /language — Lets you pick a voice recognition language 📣
@@ -17,18 +17,20 @@ help: |
 
   Address any concerns and questions to my creator — @massierc 🦄
 error_group: '😅 Sorry, but this command only works in group chats.'
-lock_true: '🔑 Great! *Trellobello* will now respond only to command calls sent by *admins* in this chat.'
-lock_false: '🔑 Great! *Trellobello* will now respond only to command calls from *anyone* in this chat.'
-silent_true: '😶 Magnificent! *Trellobello* will now work in *silent mode*: it will not send any messages to the chat except for the actual voice transcriptions.'
-silent_false: '😏 Magnificent! *Trellobello* will now work in *usual mode*: it will send `Voice recognition is initiated` messages right after it receives voice messages.'
+lock_true: '🔑 Great! *Bottino* will now respond only to command calls sent by *admins* in this chat.'
+lock_false: '🔑 Great! *Bottino* will now respond only to command calls from *anyone* in this chat.'
+silent_true: '😶 Magnificent! *Bottino* will now work in *silent mode*: it will not send any messages to the chat except for the actual voice transcriptions.'
+silent_false: '😏 Magnificent! *Bottino* will now work in *usual mode*: it will send `Voice recognition is initiated` messages right after it receives voice messages.'
 start: |
-  👋 Hello there! *Trellobello* is a voice recognition bot that converts all voice messages and audio files (.ogg, .flac, .wav, .mp3) it gets into text and posts it to a Trello board as a card. More information in /help.
+  👋 Hello there! *Bottino* converts speech to text from any voice message and audio file (.ogg, .flac, .wav, .mp3) and posts it to a Trello board as a card.
+
+  More information in /help.
 engine: '👋 Please, select the engine of speech recognition. Google Speech is more accurate, but has to be set up with your Google Cloud credentials (a bit tedious). Wit.ai is less accurate, but free. Please, note that both of them support different languages, so pick the one that suits you the best.'
 callback_error: 'Only the person who started command can select options'
-engine_success: "👍 Now *Trellobello* uses *${engine}* in this chat. Thank you! Don't forget to set /language."
+engine_success: "👍 Now *Bottino* uses *${engine}* in this chat. Thank you! Don't forget to set /language."
 language: '👋 Please select the language of speech recognition for ${engine}'
 language_without_engine: '👋 Please select the language of speech recognition'
-language_success: '👍 Now *Trellobello* speaks *${language}* in this chat. Thank you!'
+language_success: '👍 Now *Bottino* speaks *${language}* in this chat. Thank you!'
 error_twenty: "_👮 I can't recognize voice messages larger than 20 megabytes_"
 initiated: '_🦄 Voice recognition is initiated..._'
 speak_clearly: "_👮 Please, speak clearly, I couldn't recognize that. No card created._"
@@ -41,16 +43,16 @@ geeky: |
 
   /enableGoogle — Share your personal Google credentials with this chat without exposing them
   /disableGoogle — Remove your personal Google credentials from this chat without exposing them
-  /timecodes — Toggle timecodes in the transcriptions (when *Trellobello* specifies the timecodes for each piece of transcribed audio)
-  /url — Toggle voice recognition from URL's (*Trellobello* will try to download audio files from URL's you send and transcribe them to text)
-google_enable_personal_not_setup: 'Looks like your personal Google Cloud credentials were not set yet. Please, do so in @Trellobellobot before trying to enable your Google key in this chat.'
+  /timecodes — Toggle timecodes in the transcriptions (when *Bottino* specifies the timecodes for each piece of transcribed audio)
+  /url — Toggle voice recognition from URL's (*Bottino* will try to download audio files from URL's you send and transcribe them to text)
+google_enable_personal_not_setup: 'Looks like your personal Google Cloud credentials were not set yet. Please, do so in @Bottinobot before trying to enable your Google key in this chat.'
 google_enable_success: 'Wonderful. Your Google Cloud credentials will now be used in this chat.'
-google_disable_personal_not_setup: 'Looks like your personal Google Cloud credentials were not set yet. Please, do so in @Trellobellobot before trying to disable your Google key in this chat.'
+google_disable_personal_not_setup: 'Looks like your personal Google Cloud credentials were not set yet. Please, do so in @Bottinobot before trying to disable your Google key in this chat.'
 google_disable_error_wrong_key: "This chat doesn't use your credentials already."
 google_disable_success: 'Wonderful. Your Google Cloud credentials will not be used in this chat anymore.'
 oops: "Ooopsie! I haven't implemented this feature yet. But be rest assured: I've received your request for it and will know that you need this feature. Thank you!"
-timecodes_true: 'Nice! Now *Trellobello* will add timecodes to the recognized text.'
-timecodes_false: 'Nice! Now *Trellobello* will not add timecodes to the recognized text.'
+timecodes_true: 'Nice! Now *Bottino* will add timecodes to the recognized text.'
+timecodes_false: 'Nice! Now *Bottino* will not add timecodes to the recognized text.'
 
 card_creation_confirmation: |
   Great, your card has been created 👉 ${url}
