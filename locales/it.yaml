@@ -28,7 +28,7 @@ callback_error: 'Solo la persona che ha lanciato il comando può selezionare le 
 engine_success: '👍 Ora *Trellobello* usa *${engine}* in questa chat. Grazie! Non dimenticare di impostare /language.'
 language: '👋 Per favore scegli il linguaggio di riconoscimento vocale per ${engine}'
 language_without_engine: '👋 Per favore scegli il linguaggio di riconoscimento vocale'
-language_success: '👍 Adesso Trellobello parla *${language}* in questa chat. Grazie!'
+language_success: '👍 Adesso *Trellobello* parla *${language}* in questa chat. Grazie!'
 error_twenty: '_👮 Non posso riconoscere messaggi vocali più grandi di 20 megabytes_'
 initiated: '_🦄 Il riconoscimento vocale è iniziato..._'
 speak_clearly: '_👮 Per favore, parla chiaramente, non sono riuscito a riconoscerlo_'
