@@ -4,7 +4,7 @@ const { updateLocale } = require('../helpers/language/languageConstants')
 
 const i18n = new I18N({
   directory: `${__dirname}/../locales`,
-  defaultLanguage: 'en',
+  defaultLanguage: 'it',
   sessionName: 'session',
   useSession: false,
   allowMissing: true,
