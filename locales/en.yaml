@@ -56,3 +56,12 @@ google_disable_success: 'Wonderful. Your Google Cloud credentials will not be us
 oops: "Ooopsie! I haven't implemented this feature yet. But be rest assured: I've received your request for it and will know that you need this feature. Thank you!"
 timecodes_true: 'Nice! Now *Voicy* will add timecodes to the recognized text.'
 timecodes_false: 'Nice! Now *Voicy* will not add timecodes to the recognized text.'
+
+card_creation_confirmation: |
+  Great, your card has been created 👉 ${url}
+  
+  🗒️ ${text}
+trello_failed: |
+  ❌ Oops, I am having troubles creating a card on Trello. The incident has been reported and will be looked into.
+
+  ${text}
