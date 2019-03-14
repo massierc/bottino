@@ -187,7 +187,7 @@ async function updateMessagewithTranscription(ctx, msg, text, chat, markdown) {
       if (text) {
         // POST card to Trello
         const { shortUrl } = await createCard({
-          listId: '5c8798ee34ac6b81df7366dd',
+          listId: '5c8a7f780b4512326223b403',
           payload: text,
         })
         message.text = ctx.i18n.t('card_creation_confirmation', { url: shortUrl, text })
