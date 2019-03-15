@@ -1,6 +1,7 @@
 const fetch = require('node-fetch')
 const { trelloUrl } = require('./url')
 const qs = require('querystring')
+const _ = require('lodash')
 
 function safeError(err) {
   const regexp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|])/ig
@@ -12,7 +13,27 @@ function safeError(err) {
   return err
 }
 
-async function createCard(params) {
+function getClient(client) {
+  return client && client.confidence > 0.4 ? _.startCase(_.toLower(client.value)) : 'Nuovo lead'
+}
+
+function getDescription(note, text) {
+  return note && note.confidence > 0.4 ? `${note.value}\n\n**Testo originale**\n*${text}*` : text
+}
+
+async function createCard({ idList, text, entities }) {
+  const params = { idList, pos: 'top' }
+  const client = entities.client[0]
+  const note = entities.note[0]
+
+  if (_.isEmpty(entities)) {
+    params.name = 'Nuovo lead'
+    params.desc = text
+  } else {
+    params.name = getClient(client)
+    params.desc = getDescription(note, text)
+  }
+
   try {
     const response = await fetch(trelloUrl(params), { method: 'POST' })
     return await response.json()

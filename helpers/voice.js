@@ -3,6 +3,7 @@ const urlFinder = require('./url')
 const createCard = require('./trello')
 const { findChat, findVoice, addVoice } = require('./db')
 const { report } = require('./report')
+const speechAPI = require('./speechAPI')
 const { timestampAndUser } = require('./logAnswerTime')
 const urlToText = require('./urlToText')
 const _ = require('lodash')
@@ -185,10 +186,13 @@ async function updateMessagewithTranscription(ctx, msg, text, chat, markdown) {
   if (!text || text.length <= 4000) {
     try {
       if (text) {
+        // GET entities from WitAI
+        const { _text, entities } = await speechAPI.getMessage(text)
         // POST card to Trello
         const { shortUrl } = await createCard({
-          listId: '5c8a7f780b4512326223b403',
-          payload: text,
+          idList: '5c8a7f780b4512326223b403',
+          text: _text,
+          entities
         })
         message.text = ctx.i18n.t('card_creation_confirmation', { url: shortUrl, text })
       } else {

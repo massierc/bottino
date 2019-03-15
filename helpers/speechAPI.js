@@ -3,8 +3,10 @@ const fs = require('fs')
 const https = require('https')
 const { witLanguages } = require('./language/languageConstants')
 const cloud = require('./cloud')
+const { witUrl } = require('./url')
 const ffmpeg = require('fluent-ffmpeg')
 const temp = require('temp')
+const fetch = require('node-fetch')
 const tryDeletingFile = require('./deleteFile')
 
 /**
@@ -252,7 +254,22 @@ async function recognizePath(path, token) {
   })
 }
 
+async function getMessage(query) {
+  const options = {
+    headers: {
+      Authorization: `Bearer ${process.env.WIT_TOKEN}`
+    }
+  }
+  try {
+    const response = await fetch(witUrl(query), options)
+    return await response.json()
+  } catch (err) {
+    throw err
+  }
+}
+
 // Exports
 module.exports = {
   getText,
+  getMessage,
 }
