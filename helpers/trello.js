@@ -17,21 +17,21 @@ function getClient(client) {
   return client && client.confidence > 0.4 ? _.startCase(_.toLower(client.value)) : 'Nuovo lead'
 }
 
-function getDescription(note, text) {
-  return note && note.confidence > 0.4 ? `${note.value}\n\n**Testo originale**\n*${text}*` : text
+function getDescription(client, note, text) {
+  return client && note && note.confidence > 0.4 ? `${note.value}\n\n**Testo originale**\n*${text}*` : text
 }
 
 async function createCard({ idList, text, entities }) {
   const params = { idList, pos: 'top' }
-  const client = entities.client[0]
-  const note = entities.note[0]
+  const client = entities.client && entities.client[0]
+  const note = entities.note && entities.note[0]
 
   if (_.isEmpty(entities)) {
     params.name = 'Nuovo lead'
     params.desc = text
   } else {
     params.name = getClient(client)
-    params.desc = getDescription(note, text)
+    params.desc = getDescription(client, note, text)
   }
 
   try {
