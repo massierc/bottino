@@ -1,7 +1,4 @@
 // Dependencies
-const download = require('download')
-const temp = require('temp')
-const fs = require('fs')
 const urlFinder = require('./url')
 const createCard = require('./trello')
 const { findChat, findVoice, addVoice } = require('./db')
@@ -9,7 +6,6 @@ const { report } = require('./report')
 const speechAPI = require('./speechAPI')
 const { timestampAndUser } = require('./logAnswerTime')
 const urlToText = require('./urlToText')
-const tryDeletingFile = require('./deleteFile')
 const _ = require('lodash')
 
 /**
