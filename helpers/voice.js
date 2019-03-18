@@ -179,56 +179,54 @@ async function sendAction(ctx, url, chat) {
 async function updateMessagewithTranscription(ctx, msg, text, url, chat, markdown) {
   // Create options
   const options = {}
-  const message = {}
+
   if (!text || markdown) {
     options.parse_mode = 'Markdown'
   }
-  if (!text || text.length <= 4000) {
-    try {
-      if (text) {
-        // GET entities from WitAI
-        const { _text, entities } = await speechAPI.getMessage(text)
-        // POST card to Trello
-        const trello = await createCard({
-          text: _text,
-          urlSource: url,
-          entities
-        })
-        if (trello.error) throw trello
-        message.text = ctx.i18n.t('card_creation_confirmation', { url: trello.shortUrl, text })
-      } else {
-        message.text = ctx.i18n.t('speak_clearly')
-      }
-    } catch (err) {
-      // console.log('err', err)
-      message.text = ctx.i18n.t('trello_failed', { text })
-      report(ctx, err, 'createCard')
-    }
-    // Edit message
+
+  if (!text) {
     await ctx.telegram.editMessageText(
       msg.chat.id,
       msg.message_id,
       null,
-      message.text,
+      ctx.i18n.t('speak_clearly'),
       options
     )
-  } else {
-    // Get chunks
-    const chunks = text.match(/.{1,4000}/g)
-    // Edit message
+    return
+  }
+
+  try {
+    const newCard = await createCard({ text, urlSource: url })
+
     await ctx.telegram.editMessageText(
       msg.chat.id,
       msg.message_id,
       null,
-      chunks.shift(),
+      ctx.i18n.t(
+        'card_creation_confirmation',
+        { url: newCard.shortUrl }
+      ),
       options
     )
-    // Send the rest of text
-    for (const chunk of chunks) {
-      await ctx.reply(chunk, {
-        reply_to_message_id: msg.message_id,
+
+    if (text.length <= 4000) {
+      await ctx.telegram.sendMessage(msg.chat.id, `🗒️ ${text}`)
+    } else {
+      // Send text in chunks
+      text.match(/.{1,4000}/g).forEach(async (chunk, i) => {
+        const message = i === 0 ? `🗒️ ${chunk}` : chunk
+        await ctx.telegram.sendMessage(msg.chat.id, message)
       })
     }
+  } catch (err) {
+    await ctx.telegram.editMessageText(
+      msg.chat.id,
+      msg.message_id,
+      null,
+      ctx.i18n.t('trello_failed', { text }),
+      options
+    )
+    report(ctx, err, 'createCard')
   }
 }
 

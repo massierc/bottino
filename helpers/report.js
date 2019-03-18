@@ -40,14 +40,11 @@ async function report(bot, err, prefix) {
           username: process.env.USERNAME,
           channelMode: true,
         }).telegram
+    const stackTrace = prefix ? `\nstack collapsed at: <code>${prefix}</code>` : ''
     await telegram.sendMessage(
       process.env.ADMIN_ID,
-      `*Bottino*${prefix ? ` (${prefix})` : ''}:\nMessage: ${
-        err.message
-      }\n\`\`\`${JSON.stringify(err, undefined, 2)}\`\`\``,
-      {
-        parse_mode: 'Markdown',
-      }
+      `<b>Bottino error report</b>${stackTrace}\n\nMessage:\n<pre>${err.message || err.error}</pre>`,
+      { parse_mode: 'html' }
     )
   } catch (error) {
     // Do nothing

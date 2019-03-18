@@ -54,10 +54,7 @@ oops: "Ooopsie! I haven't implemented this feature yet. But be rest assured: I'v
 timecodes_true: 'Nice! Now *Bottino* will add timecodes to the recognized text.'
 timecodes_false: 'Nice! Now *Bottino* will not add timecodes to the recognized text.'
 
-card_creation_confirmation: |
-  Great, your card has been created 👉 ${url}
-  
-  🗒️ ${text}
+card_creation_confirmation: Great, your card has been created 👉 ${url}\n
 trello_failed: |
   ❌ Oops, I am having troubles creating a card on Trello. The incident has been reported and will be looked into.
 

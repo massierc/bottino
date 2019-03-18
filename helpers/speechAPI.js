@@ -262,7 +262,10 @@ async function getMessage(query) {
   }
   try {
     const response = await fetch(witUrl(query), options)
-    return await response.json()
+    if (response.status === 200) {
+      return await response.json()
+    }
+    throw await response.json()
   } catch (err) {
     throw err
   }

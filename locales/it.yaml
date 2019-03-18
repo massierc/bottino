@@ -37,10 +37,7 @@ speak_clearly: '_👮 Per favore, parla chiaramente, non sono riuscito a capire 
 error: '_👮 Non sono riuscito a capire il messaggio. Nessuna card creata._'
 google_error_creds: '😮 Per favore, imposta le credenziali di Google con il comando /google oppure cambia motore con il comando /engine. Le tue credenziali non sono ancora impostate.'
 
-card_creation_confirmation: |
-  Ottimo, la card è stata creata 👉 ${url}
-  
-  🗒️ ${text}
+card_creation_confirmation: Ottimo, la card è stata creata 👉 ${url}\n
 trello_failed: |
   ❌ Oops, sto avendo problemi a creare una card su Trello. Il problema è stato segnalato.
 
