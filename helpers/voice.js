@@ -1,4 +1,7 @@
 // Dependencies
+const download = require('download')
+const temp = require('temp')
+const fs = require('fs')
 const urlFinder = require('./url')
 const createCard = require('./trello')
 const { findChat, findVoice, addVoice } = require('./db')
@@ -6,6 +9,7 @@ const { report } = require('./report')
 const speechAPI = require('./speechAPI')
 const { timestampAndUser } = require('./logAnswerTime')
 const urlToText = require('./urlToText')
+const tryDeletingFile = require('./deleteFile')
 const _ = require('lodash')
 
 /**
@@ -71,12 +75,12 @@ async function sendTranscription(ctx, url, chat) {
         ? dbvoice.textWithTimecodes.map(t => `${t[0]}:\n${t[1]}`).join('\n')
         : dbvoice.text
       : dbvoice.text
-    updateMessagewithTranscription(ctx, sentMessage, text, chat)
+    updateMessagewithTranscription(ctx, sentMessage, text, url, chat)
     return
   }
   // Check if ok with google engine
   if (chat.engine === 'google' && !chat.googleKey) {
-    updateWithGoogleKeyError(ctx, sentMessage, chat)
+    updateWithGoogleKeyError(ctx, sentMessage, chat, url)
     return
   }
   try {
@@ -89,7 +93,7 @@ async function sendTranscription(ctx, url, chat) {
     const text = chat.timecodesEnabled
       ? textWithTimecodes.map(t => `${t[0]}:\n${t[1]}`).join('\n')
       : textWithTimecodes.map(t => t[1]).join('. ')
-    await updateMessagewithTranscription(ctx, sentMessage, text, chat)
+    await updateMessagewithTranscription(ctx, sentMessage, text, url, chat)
     // Save voice to db
     await addVoice(
       url,
@@ -176,7 +180,7 @@ async function sendAction(ctx, url, chat) {
  * @param {Mongoose:Chat} chat Relevant to this voice chat
  * @param {Boolean} markdown Whether to support markdown or not
  */
-async function updateMessagewithTranscription(ctx, msg, text, chat, markdown) {
+async function updateMessagewithTranscription(ctx, msg, text, url, chat, markdown) {
   // Create options
   const options = {}
   const message = {}
@@ -189,15 +193,18 @@ async function updateMessagewithTranscription(ctx, msg, text, chat, markdown) {
         // GET entities from WitAI
         const { _text, entities } = await speechAPI.getMessage(text)
         // POST card to Trello
-        const { shortUrl } = await createCard({
+        const trello = await createCard({
           text: _text,
+          urlSource: url,
           entities
         })
-        message.text = ctx.i18n.t('card_creation_confirmation', { url: shortUrl, text })
+        if (trello.error) throw trello
+        message.text = ctx.i18n.t('card_creation_confirmation', { url: trello.shortUrl, text })
       } else {
         message.text = ctx.i18n.t('speak_clearly')
       }
     } catch (err) {
+      // console.log('err', err)
       message.text = ctx.i18n.t('trello_failed', { text })
       report(ctx, err, 'createCard')
     }
@@ -314,11 +321,12 @@ function sendVoiceRecognitionMessage(ctx, message) {
   })
 }
 
-function updateWithGoogleKeyError(ctx, sentMessage, chat) {
+function updateWithGoogleKeyError(ctx, sentMessage, chat, url) {
   updateMessagewithTranscription(
     ctx,
     sentMessage,
     ctx.i18n.t('google_error_creds'),
+    url,
     chat,
     true
   )

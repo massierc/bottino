@@ -1,7 +1,6 @@
 const fetch = require('node-fetch')
 const { trelloUrl } = require('./url')
 const qs = require('querystring')
-const URL = require('url');
 const _ = require('lodash')
 
 function safeError(err) {
@@ -30,8 +29,8 @@ function getTimestamp() {
   return new Date().toLocaleDateString('it', options)
 }
 
-async function createCard({ text, entities }) {
-  const params = { pos: 'top' }
+async function createCard({ text, entities, ...rest }) {
+  const params = { pos: 'top', ...rest }
   const client = clientParsed(entities.client) && entities.client[0].value
   const note = entities.note && entities.note.map(n => n.value).join(' ')
   const desc = note ? `${note}\n\n**Testo originale**\n*${text}*` : text
