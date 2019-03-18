@@ -1,6 +1,7 @@
 const fetch = require('node-fetch')
 const { trelloUrl } = require('./url')
 const qs = require('querystring')
+const URL = require('url');
 const _ = require('lodash')
 
 function safeError(err) {
@@ -13,25 +14,36 @@ function safeError(err) {
   return err
 }
 
-function getClient(client) {
-  return client && client.confidence > 0.4 ? _.startCase(_.toLower(client.value)) : 'Nuovo lead'
+function clientParsed(client) {
+  return client && client[0].confidence > 0.4
 }
 
-function getDescription(client, note, text) {
-  return client && note && note.confidence > 0.4 ? `${note.value}\n\n**Testo originale**\n*${text}*` : text
+function getTimestamp() {
+  const options = {
+    day: 'numeric',
+    year: 'numeric',
+    month: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: false
+  }
+  return new Date().toLocaleDateString('it', options)
 }
 
-async function createCard({ idList, text, entities }) {
-  const params = { idList, pos: 'top' }
-  const client = entities.client && entities.client[0]
-  const note = entities.note && entities.note[0]
+async function createCard({ text, entities }) {
+  const params = { pos: 'top' }
+  const client = clientParsed(entities.client) && entities.client[0].value
+  const note = entities.note && entities.note.map(n => n.value).join(' ')
+  const desc = note ? `${note}\n\n**Testo originale**\n*${text}*` : text
 
-  if (_.isEmpty(entities)) {
-    params.name = 'Nuovo lead'
-    params.desc = text
+  if (client) {
+    params.idList = process.env.TRELLO_RECEIVED_LIST_ID
+    params.name = `${_.startCase(_.toLower(client))} - ${getTimestamp()}`
+    params.desc = desc
   } else {
-    params.name = getClient(client)
-    params.desc = getDescription(client, note, text)
+    params.idList = process.env.TRELLO_UNKNOWN_LIST_ID
+    params.name = `Unknown - ${getTimestamp()}`
+    params.desc = text
   }
 
   try {

@@ -190,7 +190,6 @@ async function updateMessagewithTranscription(ctx, msg, text, chat, markdown) {
         const { _text, entities } = await speechAPI.getMessage(text)
         // POST card to Trello
         const { shortUrl } = await createCard({
-          idList: '5c8a7f780b4512326223b403',
           text: _text,
           entities
         })
