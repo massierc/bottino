@@ -10,9 +10,9 @@ services:
     links:
       - mongo
     depends_on:
-      - mongodb
+      - mongo
   mongo:
-    container_name: mongodb
+    container_name: mongo
     image: mongo
     volumes:
       - ./data:/data/db
