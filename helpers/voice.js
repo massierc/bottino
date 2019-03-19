@@ -1,9 +1,8 @@
 // Dependencies
 const urlFinder = require('./url')
-const createCard = require('./trello')
+const trello = require('./trello')
 const { findChat, findVoice, addVoice } = require('./db')
 const { report } = require('./report')
-const speechAPI = require('./speechAPI')
 const { timestampAndUser } = require('./logAnswerTime')
 const urlToText = require('./urlToText')
 const _ = require('lodash')
@@ -105,7 +104,7 @@ async function sendTranscription(ctx, url, chat) {
   } finally {
     // Log time
     console.info(
-      timestampAndUser(ctx.update.message.from),
+      timestampAndUser(_.get(ctx, 'update.message.from', undefined)),
       `audio message processed in ${(new Date().getTime() - ctx.timeReceived.getTime()) / 1000}s`
     )
   }
@@ -162,7 +161,7 @@ async function sendAction(ctx, url, chat) {
   } finally {
     // Log time
     console.info(
-      timestampAndUser(ctx.update.message.from),
+      timestampAndUser(_.get(ctx, 'update.message.from', undefined)),
       `audio message processed in ${(new Date().getTime() - ctx.timeReceived.getTime()) / 1000}s`
     )
   }
@@ -179,6 +178,7 @@ async function sendAction(ctx, url, chat) {
 async function updateMessagewithTranscription(ctx, msg, text, url, chat, markdown) {
   // Create options
   const options = {}
+  const username = _.get(ctx, 'update.message.from.username', undefined)
 
   if (!text || markdown) {
     options.parse_mode = 'Markdown'
@@ -196,7 +196,7 @@ async function updateMessagewithTranscription(ctx, msg, text, url, chat, markdow
   }
 
   try {
-    const newCard = await createCard({ text, urlSource: url })
+    const newCard = await trello.createCard({ text, username, urlSource: url })
 
     await ctx.telegram.editMessageText(
       msg.chat.id,

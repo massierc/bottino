@@ -10,13 +10,13 @@ function fileUrl(filePath) {
   return `https://api.telegram.org/file/bot${process.env.BOT_TOKEN}/${qs.escape(filePath)}`
 }
 
-function trelloUrl(params) {
+function trello(path, params) {
   const p = {
     key: process.env.TRELLO_KEY,
     token: process.env.TRELLO_TOKEN,
     ...params
   }
-  return `${process.env.TRELLO_BASE_URL}/cards?${qs.stringify(p)}`
+  return `${process.env.TRELLO_BASE_URL}/${path}?${qs.stringify(p)}`
 }
 
 function witUrl(query) {
@@ -30,6 +30,6 @@ function witUrl(query) {
 // Exports
 module.exports = {
   fileUrl,
-  trelloUrl,
+  trello,
   witUrl,
 }
