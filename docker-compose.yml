@@ -4,6 +4,21 @@ services:
     container_name: app
     image: massierc/bottino-node:v1
     restart: always
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - BOT_TOKEN=${BOT_TOKEN}
+      - MONGO_URL=${MONGO_URL}
+      - ADMIN_ID=${ADMIN_ID}
+      - SALT=${SALT}
+      - WIT_TOKEN=${WIT_TOKEN}
+      - WIT_LANGUAGES=${WIT_LANGUAGES}
+      - WIT_BASE_URL=${WIT_BASE_URL}
+      - TRELLO_KEY=${TRELLO_KEY}
+      - TRELLO_TOKEN=${TRELLO_TOKEN}
+      - TRELLO_BASE_URL=${TRELLO_BASE_URL}
+      - TRELLO_BOARD_ID=${TRELLO_BOARD_ID}
+      - TRELLO_RECEIVED_LIST_ID=${TRELLO_RECEIVED_LIST_ID}
+      - TRELLO_UNKNOWN_LIST_ID=${TRELLO_UNKNOWN_LIST_ID}
     build: .
     ports:
       - "3000:3000"
@@ -18,5 +33,3 @@ services:
       - ./data:/data/db
     ports:
       - "27017:27017"
-networks:
-  webnet:
