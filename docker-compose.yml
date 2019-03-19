@@ -7,7 +7,7 @@ services:
     environment:
       - NODE_ENV=${NODE_ENV}
       - BOT_TOKEN=${BOT_TOKEN}
-      - MONGO_URL=${MONGO_URL}
+      - MONGO_URL=mongodb://mongo:27017/trellobello_db
       - ADMIN_ID=${ADMIN_ID}
       - SALT=${SALT}
       - WIT_TOKEN=${WIT_TOKEN}
