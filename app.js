@@ -29,6 +29,18 @@ const setupAudioHandler = require('./helpers/handler')
 // Callbacks
 const setupCallbackHandler = require('./helpers/callback')
 
+if (process.env.NODE_ENV === 'development') {
+  // Express
+  const express = require('express');
+  const cluster = require('cluster')
+
+  if (cluster.isMaster) {
+    const app = express();
+    app.use('/healthcheck', (_req, res) => res.sendStatus(200));
+    app.listen(3000)
+  }
+}
+
 // Init
 setupPromises()
 setupMongoose()
