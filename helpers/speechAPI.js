@@ -8,6 +8,7 @@ const ffmpeg = require('fluent-ffmpeg')
 const temp = require('temp')
 const fetch = require('node-fetch')
 const tryDeletingFile = require('./deleteFile')
+const _ = require('lodash')
 
 /**
  * Function that converts url with audio file into text
@@ -260,12 +261,46 @@ async function getMessage(query) {
       Authorization: `Bearer ${process.env.WIT_TOKEN}`
     }
   }
-  try {
-    const response = await fetch(witUrl(query), options)
-    if (response.status === 200) {
-      return await response.json()
+
+  // if long message, parse by chunk
+  if (query.length > 250) {
+    const chunks = query.match(/.{1,250}/g);
+    const promises = []
+    chunks.forEach(chunk => {
+      promises.push(
+        new Promise(async (res, rej) => {
+          try {
+            const response = await fetch(witUrl(chunk), options)
+            if (response.status === 200) {
+              res(response.json())
+              return
+            }
+            throw await response.json()
+          } catch (err) {
+            rej(err)
+          }
+        }
+      ))
+    })
+    try {
+      const responses = await Promise.all(promises)
+      const client = _.get(responses, '0,entities,client,0', undefined)
+      const note = responses.map(r => r._text).join('')
+      return { client, note }
+    } catch (err) {
+      throw err
     }
-    throw await response.json()
+  }
+
+  try {
+    const res = await fetch(witUrl(query), options)
+    if (res.status === 200) {
+      const response = await res.json()
+      const client = _.get(response, 'entities,client,0', undefined)
+      const note = response._text
+      return { client, note }
+    }
+    throw await res.json()
   } catch (err) {
     throw err
   }

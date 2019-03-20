@@ -19,10 +19,6 @@ function safeError(err) {
   }
 }
 
-function clientParsed(client) {
-  return client && client[0].confidence > 0.4
-}
-
 function getTimestamp() {
   const options = {
     day: 'numeric',
@@ -35,27 +31,14 @@ function getTimestamp() {
   return new Date().toLocaleDateString('it', options)
 }
 
-function getDescription(note, text, user) {
-  const desc = [
-    note,
-    note && '\n\n---\n\n',
-    note && '**Testo originale**\n',
-    text,
-    (!note && user) && '\n\n---\n\n',
-    user && `\n\n**Creato da**\n${user.fullName} (@${user.username})`
-  ]
-  return desc.join('')
-}
-
 async function createCard({ text, username, ...rest }) {
   try {
-    const { entities } = await speechAPI.getMessage(text)
-    const client = clientParsed(entities.client) && entities.client[0].value
-    const note = entities.note && entities.note.map(n => n.value).join(' ')
+    const { client, note } = await speechAPI.getMessage(text)
     const user = USERS[username]
+    const desc = `${note}${user && `\n\n---\n\n**Creato da**\n${user.fullName} (@${user.username})`}`
     const params = {
       pos: 'top',
-      desc: getDescription(client && note, text, user),
+      desc,
       idMembers: user && user.id,
       ...rest
     }
