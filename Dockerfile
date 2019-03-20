@@ -1,5 +1,9 @@
-FROM node:10
+FROM jrottenberg/ffmpeg:3.4-alpine AS ffmpeg
+FROM node:10-alpine
 
+COPY --from=ffmpeg / /
+
+ENV FFMPEG_PATH = '/usr/local/bin/ffmpeg'
 ENV NODE_ENV = 'production'
 
 WORKDIR /usr/src/app
