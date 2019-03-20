@@ -19,6 +19,7 @@ services:
       - TRELLO_BOARD_ID=${TRELLO_BOARD_ID}
       - TRELLO_RECEIVED_LIST_ID=${TRELLO_RECEIVED_LIST_ID}
       - TRELLO_UNKNOWN_LIST_ID=${TRELLO_UNKNOWN_LIST_ID}
+      - WAIT_HOSTS=mongo:27017
     build: .
     ports:
       - "3000:3000"
